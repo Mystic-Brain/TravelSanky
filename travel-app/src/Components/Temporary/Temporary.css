@@ -1,0 +1,193 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;900&display=swap');
+
+:root {
+  --bg1: #0a021f;
+  --bg2: #1b0442;
+  --accent1: #8e2de2;   /* purple */
+  --accent2: #4a00e0;   /* deep violet */
+  --accent3: #00eaff;   /* cyan */
+  --accent4: #ffba00;   /* golden accent */
+  --glass: rgba(255, 255, 255, 0.06);
+  --card-blur: 12px;
+}
+
+/* ==== Base layout ==== */
+.under-construction-wrap {
+  min-height: 100vh;
+  width: 100%;
+  font-family: "Poppins", sans-serif;
+  color: #f5f6ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(800px 600px at 80% 10%, rgba(142,45,226,0.2), transparent 60%),
+              radial-gradient(900px 700px at 10% 90%, rgba(74,0,224,0.15), transparent 60%),
+              linear-gradient(160deg, var(--bg1), var(--bg2));
+}
+
+/* Animated background glow */
+.bg-overlay {
+  position: absolute;
+  inset: -30%;
+  background: conic-gradient(from 90deg, rgba(0,234,255,0.2), rgba(255,186,0,0.1), rgba(142,45,226,0.2));
+  filter: blur(80px);
+  animation: glowShift 12s linear infinite;
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+@keyframes glowShift {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(1.05); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+/* ==== Card ==== */
+.uc-card {
+  z-index: 2;
+  width: min(95%, 950px);
+  padding: clamp(28px, 4vw, 60px);
+  text-align: center;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(var(--card-blur));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.6), inset 0 0 15px rgba(255, 255, 255, 0.05);
+  animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==== Title ==== */
+.uc-title {
+  font-size: clamp(2.2rem, 6vw, 4.5rem);
+  font-weight: 900;
+  background: linear-gradient(90deg, var(--accent1), var(--accent3), var(--accent4));
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: colorFlow 6s ease infinite;
+  text-shadow: 0 0 25px rgba(0, 234, 255, 0.3);
+}
+
+@keyframes colorFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ==== Subline ==== */
+.uc-subline {
+  margin-top: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #dbeafe;
+}
+
+.gear {
+  color: var(--accent4);
+  animation: spin 3.5s linear infinite;
+  filter: drop-shadow(0 0 10px rgba(255,186,0,0.5));
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ==== Date ==== */
+.uc-date {
+  margin-top: 10px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #a3bffa;
+}
+
+.uc-date span {
+  color: var(--accent3);
+  font-weight: 700;
+  text-shadow: 0 0 10px rgba(0,234,255,0.5);
+}
+
+/* ==== Footer ==== */
+.uc-footer {
+  margin-top: 25px;
+  font-size: 0.9rem;
+  opacity: 0.8;
+  color: #ddd;
+}
+
+/* ============================================================= */
+/* 🧩 RESPONSIVE MEDIA QUERIES */
+/* ============================================================= */
+
+/* Tablets (portrait / landscape) */
+@media (max-width: 992px) {
+  .uc-card {
+    padding: 40px 30px;
+    border-radius: 18px;
+  }
+  .uc-title {
+    font-size: 3rem;
+  }
+  .uc-subline {
+    font-size: 1.4rem;
+  }
+  .uc-date {
+    font-size: 1rem;
+  }
+}
+
+/* Mobile Large (e.g., iPhone Pro Max, Pixel 7) */
+@media (max-width: 768px) {
+  .uc-card {
+    width: 90%;
+    padding: 32px 20px;
+  }
+  .uc-title {
+    font-size: 2.3rem;
+    line-height: 1.2;
+  }
+  .uc-subline {
+    flex-direction: column;
+    font-size: 1.2rem;
+    gap: 8px;
+  }
+  .gear svg {
+    width: 28px;
+    height: 28px;
+  }
+  .uc-date {
+    margin-top: 12px;
+    font-size: 0.95rem;
+  }
+}
+
+/* Mobile Small (e.g., iPhone SE / 320–480px) */
+@media (max-width: 480px) {
+  .uc-card {
+    padding: 25px 14px;
+    border-radius: 12px;
+  }
+  .uc-title {
+    font-size: 1.8rem;
+  }
+  .uc-subline {
+    font-size: 1rem;
+  }
+  .uc-date {
+    font-size: 0.85rem;
+  }
+  .uc-footer {
+    font-size: 0.75rem;
+  }
+}
